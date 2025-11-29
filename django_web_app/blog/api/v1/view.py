@@ -1,8 +1,8 @@
 from rest_framework.generics import GenericAPIView
 from rest_framework import status
 from rest_framework.response import Response
-from models import Post
-from django_web_app.blog.api.v1.serializer import PostSerializer
+from blog.models import Post
+from .serializer import PostSerializer
 
 
 class PosttListCreateAPIView(GenericAPIView):

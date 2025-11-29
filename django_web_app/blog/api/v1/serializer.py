@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from models import Post
+from blog.models import Post
 
 
 class PostSerializer(ModelSerializer):
