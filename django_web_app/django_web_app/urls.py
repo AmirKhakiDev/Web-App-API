@@ -38,7 +38,9 @@ urlpatterns = [
     path('', include('blog.urls')),
 
     path('api/v1/', include(("blog.api.v1.urls","v1"), namespace='v1-blog')),
-    path('api/v1/', include(("users.api.v1.urls","v1"), namespace='v1-user'))
+    path('api/v1/', include(("users.api.v1.urls","v1"), namespace='v1-user')),
+
+    path('api-auth/', include('rest_framework.urls'))
 ]
 
 

@@ -13,6 +13,7 @@ from .models import Post
 import operator
 from django.urls import reverse_lazy
 from django.contrib.staticfiles.views import serve
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from django.db.models import Q
 
@@ -60,9 +61,10 @@ class UserPostListView(ListView):
         return Post.objects.filter(author=user).order_by("-date_posted")
 
 
-class PostDetailView(DetailView):
+class PostDetailView(LoginRequiredMixin,DetailView):
     model = Post
     template_name = "blog/post_detail.html"
+    
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
