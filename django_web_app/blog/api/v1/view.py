@@ -3,11 +3,14 @@ from rest_framework import status
 from rest_framework.response import Response
 from blog.models import Post
 from .serializer import PostSerializer
-    
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 class PosttListCreateAPIView(GenericAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["title"]
 
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
@@ -25,6 +28,8 @@ class PosttListCreateAPIView(GenericAPIView):
 class PostRetrieveUpdateDestroyAPIView(GenericAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["title"]
 
     def get_object(self, pk):
         try:
