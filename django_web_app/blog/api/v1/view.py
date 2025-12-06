@@ -23,8 +23,15 @@ class PosttListCreateAPIView(GenericAPIView):
 
     def get(self, request):
         posts = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(posts)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
         serializer = self.get_serializer(posts, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.data)
+
 
 
 class PostRetrieveUpdateDestroyAPIView(GenericAPIView):
