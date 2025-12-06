@@ -10,9 +10,7 @@ class PosttListCreateAPIView(GenericAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = {
-        "title": ["icontains"]
-    }
+    filterset_fields = {"title": ["icontains"]}
 
     def post(self, request):
         serializer = self.get_serializer(data=request.data)
@@ -31,7 +29,6 @@ class PosttListCreateAPIView(GenericAPIView):
 
         serializer = self.get_serializer(posts, many=True)
         return Response(serializer.data)
-
 
 
 class PostRetrieveUpdateDestroyAPIView(GenericAPIView):
