@@ -1,69 +1,175 @@
-# Django-WebApp       <img alt="GitHub" src="https://img.shields.io/github/license/smahesh29/Django-WebApp">
+# Web-App-API
 
+A **Backend / REST API service** built with Django, providing user
+authentication, file upload and management, profile viewing, and
+file-sharing features. This backend is part of a web application
+project.
 
-This project was done by me as a assignment for an internship.
+## Table of Contents
 
-<h2>Assignment Problem Statement:</h2>
+-   [Overview](#overview)
+-   [Features](#features)
+-   [Technology Stack](#technology-stack)
+-   [Prerequisites](#prerequisites)
+-   [Installation](#installation)
+-   [Environment Configuration](#environment-configuration)
+-   [Running the Server](#running-the-server)
+-   [API Endpoints](#api-endpoints)
+-   [Example Requests](#example-requests)
+-   [Project Structure](#project-structure)
+-   [Testing](#testing)
+-   [Contributing](#contributing)
+-   [License](#license)
+-   [Contact](#contact)
 
-<h4>Part 1:</h4>
-<ol>
-    <li>Create a web-app where a user can login.</li>
-    <li>User can upload files.</li>
-    <li>User can view his/her uploaded files.</li>
-</ol>
+## Overview
 
-<h4>Part 2:</h4>
-<ol>
-     <li>User can search and view profile of other users.</li>
-     <li>They can share their uploaded files with any of those users.</li>
-     <li>Users can see the shared files by other users also in uploaded files.</li>
-</ol>
+**Web-App-API** is the backend component of a Django-based web
+application.\
+It implements essential user functionalities such as registration,
+login, file handling, and profile management.\
+All services are exposed through a clean RESTful API suitable for
+frontend clients or external integrations.
 
-<h4>Additional Features:</h4>
-<ol>
-    <li>In users profile user can set his/her profile picture.</li>
-    <li>Users can download other users uploaded files.</li>
-    <li>The user can upload any type of files such as images, videos, text files and also different types of programs like python code, java code, etc.</li>
-</ol>
-    
-<h2>Technologies Used:</h2>
-<ul>
-    <li>Python</li>
-    <li>Django</li>
-    <li>Bootstrap</li>
-    <li>JavaScript</li>
-</ul>
-    
-<h2>Additional Python Modules Required:</h2>
-<ul>
-    <li>Django</li>
-    <li>django-crispy-forms</li>
-    <li>Pillow</li>
-</ul>
-  
-<h2>Note :</h2>
+## Features
 
-<b>The Secret_Key required for the execution and debugging of project is not removed from the project code. So you can use the project as your college mini-project or by using the project code you can build your own project.</b>
+### Core Capabilities
 
-<h2>Usage :</h2>
+-   User registration and authentication
+-   Session/token-based login
+-   File upload
+-   File download
+-   Viewing user's own uploaded files
+-   Viewing other users' profiles
+-   Sharing files with other users
+-   Viewing shared files
 
-    python django_web_app/manage.py makemigrations
+## Technology Stack
 
-    python django_web_app/manage.py migrate
+-   Python\
+-   Django\
+-   Django REST Framework\
+-   HTML, CSS, JavaScript\
+-   Bootstrap
 
-    python django_web_app/manage.py runserver
-    
-   In your web browser enter the address : http://localhost:8000 or http://127.0.0.1:8000/
+## Prerequisites
 
-# Working:
-[![Watch the video](https://img.youtube.com/vi/qIK-vfTig6c/0.jpg)](https://youtu.be/qIK-vfTig6c)
+-   Python 3.8+\
+-   pip\
+-   virtualenv (optional)
 
-# Screenshots : 
-<img src="Screenshots/New Tab - Google Chrome 03-12-2019 19_14_36.png" height="400" width="800">
-<img src="Screenshots/New Tab - Google Chrome 03-12-2019 19_14_51.png" height="400" width="800">
-<img src="Screenshots/New Tab - Google Chrome 03-12-2019 19_14_44.png" height="400" width="800">
-<img src="Screenshots/New Tab - Google Chrome 03-12-2019 19_15_47.png" height="400" width="800">
-<img src="Screenshots/New Tab - Google Chrome 03-12-2019 19_16_14.png" height="400" width="800">
-<img src="Screenshots/Django WebApp - Google Chrome 04-12-2019 13_41_50.png" height="400" width="800">
-<img src="Screenshots/Django WebApp - Google Chrome 03-12-2019 20_48_45.png" height="400" width="800">
+## Installation
 
+### Clone the repository
+
+``` bash
+git clone https://github.com/AmirKhakiDev/Web-App-API.git
+cd Web-App-API
+```
+
+### Create and activate a virtual environment
+
+``` bash
+python -m venv venv
+venv\Scripts\activate    # Windows
+source venv/bin/activate  # macOS / Linux
+```
+
+### Install dependencies
+
+``` bash
+pip install -r requirements.txt
+```
+
+### Apply migrations
+
+``` bash
+python django_web_app/manage.py makemigrations
+python django_web_app/manage.py migrate
+```
+
+## Environment Configuration
+
+Create a `.env` file:
+
+    SECRET_KEY=your_secret_key
+    DEBUG=True
+    ALLOWED_HOSTS=localhost,127.0.0.1
+
+## Running the Server
+
+``` bash
+python django_web_app/manage.py runserver
+```
+
+## API Endpoints
+
+### Authentication
+
+  Method   Endpoint         Description
+  -------- ---------------- -------------------
+  POST     /api/register/   Register new user
+  POST     /api/login/      Login user
+  POST     /api/logout/     Logout
+
+### Files
+
+  Method   Endpoint                             Description
+  -------- ------------------------------------ -----------------
+  GET      /api/files/                          List user files
+  POST     /api/files/upload/                   Upload a file
+  GET      /api/files/`<id>`{=html}/download/   Download file
+
+### Profiles
+
+  Method   Endpoint                                  Description
+  -------- ----------------------------------------- --------------
+  GET      /api/users/`<username>`{=html}/profile/   View profile
+  POST     /api/users/`<username>`{=html}/share/     Share a file
+
+## Example Requests
+
+### Register
+
+``` bash
+curl -X POST http://localhost:8000/api/register/ -H "Content-Type: application/json" -d '{"username":"alice","password":"pass123"}'
+```
+
+### Login
+
+``` bash
+curl -X POST http://localhost:8000/api/login/ -H "Content-Type: application/json" -d '{"username":"alice","password":"pass123"}'
+```
+
+## Project Structure
+
+    Web-App-API/
+    ├── django_web_app/
+    │   ├── app/
+    │   ├── settings.py
+    │   ├── urls.py
+    │   └── ...
+    ├── requirements.txt
+    ├── README.md
+    └── test.py
+
+## Testing
+
+``` bash
+python django_web_app/manage.py test
+```
+
+## Contributing
+
+1.  Fork the repo\
+2.  Create a branch\
+3.  Commit changes\
+4.  Create a Pull Request
+
+## License
+
+MIT License.
+
+## Contact
+
+Maintained by **AmirKhakiDev**.
